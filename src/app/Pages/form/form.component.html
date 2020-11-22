@@ -1,13 +1,29 @@
 <div style="width: 50%; height: auto; margin: auto;">
     <form [formGroup]="profileForm" class="form-group" (ngSubmit)="onSubmit()">
         <div class="form-group">
-            <label for="firstName">Lirst Name</label>
-            <input type="text" class="form-control" id="firstName" formControlName="firstName"
-                aria-describedby="emailHelp" placeholder="First name">
+            <label for="firstNameId">Lirst Name</label>
+            <input type="text" class="form-control" id="firstNameId" formControlName="firstName"
+                [(ngModel)]="profile.FirstName" placeholder="First name" required>
+        </div>
+        <div *ngIf="profileForm.controls.firstName.invalid && profileForm.controls.firstName.touched" class="alert alert-danger">
+
+            <div *ngIf="profileForm.controls.firstName.errors.required">
+                First Name is required.
+            </div>
+            <div *ngIf="profileForm.controls.firstName.errors.minlength">
+                Name must be at least 3 characters long.
+            </div>
         </div>
         <div class="form-group">
             <label for="lastName">Last Name</label>
-            <input type="text" class="form-control" id="lastName" formControlName="lastName" placeholder="Last name">
+            <input type="text" class="form-control" id="lastName" [(ngModel)]="profile.LastName"
+                formControlName="lastName" placeholder="Last name" required>
+        </div>
+        <div *ngIf="profileForm.controls.lastName.invalid && profileForm.controls.lastName.touched" class="alert alert-danger">
+
+            <div *ngIf="profileForm.controls.lastName.errors.required">
+                Last Name is required.
+            </div>
         </div>
         <button type="submit" [disabled]="!profileForm.valid" class="btn btn-primary">Submit</button>
     </form>
@@ -16,5 +32,19 @@
     <p>
         Value: {{ profileForm.value | json}}
     </p>
+    <p>
+        Form Status: {{ profileForm.status }}
+    </p>
+    <p>
+        Form invalid: {{ profileForm.invalid }}
+    </p>
+
+    <p>
+        Form errors: {{ profileForm.controls.firstName.errors | json}}
+    </p>
+    <p>
+        Form errors: {{ profileForm.controls.lastName.errors | json}}
+    </p>
+
 
 </div>
