@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-form',
@@ -8,7 +8,15 @@ import { FormControl } from '@angular/forms';
 })
 export class FormComponent implements OnInit {
 
-  name = new FormControl('');
+  profileForm = new FormGroup({
+    firstName : new FormControl(''),
+    lastName : new FormControl('')
+  })
+
+  onSubmit() {
+    // TODO: Use EventEmitter with form value
+    console.log(this.profileForm.value);
+  }
 
   constructor() { }
 
